@@ -1,98 +1,152 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# 📄 README.md para o projeto AgroVerde Logística
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+```markdown
+# Sistema de Gestão de Frota e Entregas - AgroVerde Logística
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+### 🚚 Projeto de controle de frota, entregas e motoristas para empresas de transporte de alimentos perecíveis.
 
-## Description
+---
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## 📋 Descrição
 
-## Project setup
+Este projeto foi desenvolvido para a empresa **AgroVerde Logística**, que realiza o transporte de frutas, vegetais e carnes no interior de São Paulo.
+
+O sistema visa **otimizar a operação logística**, resolvendo problemas como:
+- Falta de controle de manutenção dos caminhões
+- Atrasos de entrega por falha na comunicação
+- Falta de visibilidade sobre status de entregas para clientes
+- Ausência de históricos de manutenção e consumo de combustível
+
+**Principais Funcionalidades:**
+- Cadastro de caminhões, motoristas e entregas
+- Controle de manutenção e alertas preventivos
+- Dashboard de monitoramento de entregas
+- App mobile para motoristas iniciarem/finalizarem entregas
+- Sistema de notificações de manutenção
+- Geração de relatórios mensais de entregas e combustível
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+
+| Camada | Stack |
+|:---|:---|
+| Backend | [NestJS](https://nestjs.com/) + [MongoDb](https://www.mongodb.com//) |
+| Autenticação | JWT (JSON Web Tokens) |
+| Hospedagem (simulada) | Vercel
+
+---
+
+## 🚀 Funcionalidades Implementadas
+
+### Painel Web (Admin)
+
+- Login de Administrador
+- Dashboard geral com indicadores:
+  - Entregas em andamento, pendentes e finalizadas
+  - Caminhões ativos
+  - Alertas de manutenção
+- Cadastro de Caminhões:
+  - Placa, tipo, capacidade, última revisão, próxima revisão
+- Cadastro de Motoristas
+- Cadastro de Entregas:
+  - Origem, destino, horário agendado
+  - Atribuição de motorista
+- Controle de Manutenção:
+  - Agendar manutenções
+  - Gerar alertas preventivos
+- Relatórios:
+  - Histórico de entregas
+  - Consumo de combustível (manual no MVP)
+
+### App Mobile (Motorista)
+
+- Login de Motorista
+- Listagem de entregas do dia
+- Botões de:
+  - **Iniciar Entrega**
+  - **Finalizar Entrega**
+- Notificações push de manutenção
+- Visualização de entregas em andamento e entregas concluídas
+
+---
+
+## 🧱 Estrutura do Projeto
 
 ```bash
-$ npm install
-```
+backend/
+├── src/
+│   ├── auth/            # Autenticação JWT
+│   ├── user/           # Cadastro de usuários (motoristas e admins)
+│   ├── trucks/          # Cadastro de caminhões
+│   ├── deliveries/      # Controle de entregas
+│   ├── maintenance/     # Controle de manutenção
+│   └── dashboard/       # Dashboard geral
+---
 
-## Compile and run the project
+## 📦 Instalação
 
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
-## Run tests
+### 1. Clonar o repositório
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+git clone https://github.com/seu-usuario/agroverde-logistica.git
+cd agroverde-logistica
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+### 2. Rodar o Backend
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+cd backend
+npm install
+cp .env.example .env
+# Configure o .env com seu banco PostgreSQL local
+npm run start:dev
+```
+---
+
+## ⚙️ Configuração de Ambiente
+
+Backend (`backend/.env`):
+
+```env
+DATABASE_URL=mongodb://user:password@localhost:5432/agroverde
+JWT_SECRET=your_secret_key
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+Frontend e Mobile:
 
-## Resources
+- Configurar API base URL para o backend local
 
-Check out a few resources that may come in handy when working with NestJS:
+---
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+## 🧪 Testes
 
-## Support
+- Backend:
+  ```bash
+  cd backend
+  npm run test
+  ```
+---
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## 🧩 Melhorias Futuras
 
-## Stay in touch
+- Geolocalização em tempo real no app
+- Upload de comprovantes de entrega (foto)
+- Dashboard avançado com filtros por data e motorista
+- Histórico de manutenções por caminhão
+- Integração com serviços de email/SMS para alertas
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
 
-## License
+---
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+## 📑 Licença
+
+Este projeto é de uso livre para fins de estudo e portfólio.
+
+---
+
+# 🌟 Créditos
+Desenvolvido por Danilo Nogueira Silva 
+Contato: danilo.nogueira1802@gmail.com
+
+---
