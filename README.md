@@ -1,6 +1,5 @@
 # 📄 README.md para o projeto AgroVerde Logística
 
-```markdown
 # Sistema de Gestão de Frota e Entregas - AgroVerde Logística
 
 ### 🚚 Projeto de controle de frota, entregas e motoristas para empresas de transporte de alimentos perecíveis.
@@ -89,7 +88,7 @@ backend/
 ### 1. Clonar o repositório
 
 ```bash
-git clone https://github.com/seu-usuario/agroverde-logistica.git
+git clone https://github.com/DaniloNogueira-Silva/agro_delivery_management.git
 cd agroverde-logistica
 ```
 
