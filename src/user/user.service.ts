@@ -1,11 +1,16 @@
-import { Injectable, Logger, NotFoundException, InternalServerErrorException, UnauthorizedException } from '@nestjs/common';
+import {
+  Injectable,
+  Logger,
+  NotFoundException,
+  InternalServerErrorException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User } from './entities/user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import * as bcrypt from 'bcrypt';
-import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class UserService {
@@ -14,7 +19,6 @@ export class UserService {
   constructor(
     @InjectModel(User.name)
     private readonly userModel: Model<User>,
-    private readonly jwtService: JwtService,
   ) {}
 
   async create(createUserDto: CreateUserDto) {
@@ -58,13 +62,19 @@ export class UserService {
       return user;
     } catch (error) {
       this.logger.error(`Error fetching user with ID: ${id}`, error.stack);
-      throw error instanceof NotFoundException ? error : new InternalServerErrorException('Failed to fetch user');
+      throw error instanceof NotFoundException
+        ? error
+        : new InternalServerErrorException('Failed to fetch user');
     }
   }
 
   async update(id: string, updateUserDto: UpdateUserDto) {
     try {
-      const updatedUser = await this.userModel.findByIdAndUpdate(id, updateUserDto, { new: true });
+      const updatedUser = await this.userModel.findByIdAndUpdate(
+        id,
+        updateUserDto,
+        { new: true },
+      );
       if (!updatedUser) {
         this.logger.warn(`User not found for update with ID: ${id}`);
         throw new NotFoundException(`User with ID ${id} not found for update`);
@@ -73,7 +83,9 @@ export class UserService {
       return updatedUser;
     } catch (error) {
       this.logger.error(`Error updating user with ID: ${id}`, error.stack);
-      throw error instanceof NotFoundException ? error : new InternalServerErrorException('Failed to update user');
+      throw error instanceof NotFoundException
+        ? error
+        : new InternalServerErrorException('Failed to update user');
     }
   }
 
@@ -82,40 +94,17 @@ export class UserService {
       const deletedUser = await this.userModel.findByIdAndDelete(id);
       if (!deletedUser) {
         this.logger.warn(`User not found for deletion with ID: ${id}`);
-        throw new NotFoundException(`User with ID ${id} not found for deletion`);
+        throw new NotFoundException(
+          `User with ID ${id} not found for deletion`,
+        );
       }
       this.logger.log(`User deleted with ID: ${id}`);
       return { message: `User with ID ${id} successfully deleted` };
     } catch (error) {
       this.logger.error(`Error deleting user with ID: ${id}`, error.stack);
-      throw error instanceof NotFoundException ? error : new InternalServerErrorException('Failed to delete user');
-    }
-  }
-
-  async login(email: string, password: string) {
-    try {
-      const user = await this.userModel.findOne({ email });
-      if (!user) {
-        this.logger.warn(`Login failed: email not found (${email})`);
-        throw new UnauthorizedException('Invalid credentials');
-      }
-
-      const isPasswordValid = await bcrypt.compare(password, user.password);
-      if (!isPasswordValid) {
-        this.logger.warn(`Login failed: invalid password for email (${email})`);
-        throw new UnauthorizedException('Invalid credentials');
-      }
-
-      const payload = { sub: user._id, email: user.email };
-      const token = await this.jwtService.signAsync(payload);
-
-      this.logger.log(`User logged in with email: ${email}`);
-      return {
-        access_token: token,
-      };
-    } catch (error) {
-      this.logger.error(`Error during login for email: ${email}`, error.stack);
-      throw error instanceof UnauthorizedException ? error : new InternalServerErrorException('Login failed');
+      throw error instanceof NotFoundException
+        ? error
+        : new InternalServerErrorException('Failed to delete user');
     }
   }
 }
