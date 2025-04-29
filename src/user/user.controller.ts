@@ -12,7 +12,7 @@ import {
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { AuthGuard } from 'src/auth/auth.guard';
+import { AuthGuard } from '../auth/auth.guard';
 
 @Controller('user')
 export class UserController {
@@ -45,14 +45,5 @@ export class UserController {
   @Delete(':id')
   async remove(@Param('id') id: string) {
     return await this.userService.remove(id);
-  }
-
-  @UseGuards(AuthGuard)
-  @Get('profile')
-  async getProfile(@Request() req) {
-    return {
-      message: 'Profile fetched successfully',
-      user: req.user,
-    };
   }
 }

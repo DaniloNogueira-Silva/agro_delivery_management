@@ -141,40 +141,4 @@ describe('UserService', () => {
       );
     });
   });
-
-  describe('login', () => {
-    it('should return an access_token if credentials are correct', async () => {
-      const user = {
-        _id: '1',
-        email: 'test@test.com',
-        password: await (await import('bcrypt')).hash('password', 10),
-      };
-      userModel.findOne.mockResolvedValue(user);
-      jwtService.signAsync.mockResolvedValue('test-token');
-
-      const result = await service.login('test@test.com', 'password');
-      expect(result).toEqual({ access_token: 'test-token' });
-    });
-
-    it('should throw UnauthorizedException if email not found', async () => {
-      userModel.findOne.mockResolvedValue(null);
-
-      await expect(service.login('wrong@test.com', 'password')).rejects.toThrow(
-        'Invalid credentials',
-      );
-    });
-
-    it('should throw UnauthorizedException if password is wrong', async () => {
-      const user = {
-        _id: '1',
-        email: 'test@test.com',
-        password: await (await import('bcrypt')).hash('password', 10),
-      };
-      userModel.findOne.mockResolvedValue(user);
-
-      await expect(
-        service.login('test@test.com', 'wrongpassword'),
-      ).rejects.toThrow('Invalid credentials');
-    });
-  });
 });

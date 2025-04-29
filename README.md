@@ -74,7 +74,7 @@ O sistema visa **otimizar a operação logística**, resolvendo problemas como:
 
 ```bash
 backend/
-├── src/
+├── ../
 │   ├── auth/            # Autenticação JWT
 │   ├── user/           # Cadastro de usuários (motoristas e admins)
 │   ├── trucks/          # Cadastro de caminhões

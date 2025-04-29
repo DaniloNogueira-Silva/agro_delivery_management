@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { AuthGuard } from '@nestjs/passport';
+import { AuthGuard } from '../auth/auth.guard';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserController } from './user.controller';
@@ -9,6 +9,7 @@ import { UserService } from './user.service';
 describe('UserController', () => {
   let controller: UserController;
   let userService: UserService;
+  let authGuard: AuthGuard;
 
   beforeEach(async () => {
     const mockUserService = {
@@ -31,6 +32,7 @@ describe('UserController', () => {
 
     controller = module.get<UserController>(UserController);
     userService = module.get<UserService>(UserService);
+    authGuard = module.get<AuthGuard>(AuthGuard);
   });
 
   it('should be defined', () => {
@@ -89,23 +91,6 @@ describe('UserController', () => {
 
       const result = await controller.remove('1');
       expect(result).toEqual(expectedResponse);
-    });
-  });
-
-  describe('getProfile', () => {
-    it('should return the user profile', async () => {
-      const req = {
-        user: {
-          userId: '1',
-          email: 'test@test.com',
-        },
-      };
-
-      const result = await controller.getProfile(req as any);
-      expect(result).toEqual({
-        message: 'Profile fetched successfully',
-        user: req.user,
-      });
     });
   });
 });

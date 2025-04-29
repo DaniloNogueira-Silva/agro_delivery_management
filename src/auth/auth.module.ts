@@ -1,4 +1,4 @@
-import { User, UserSchema } from 'src/user/entities/user.entity';
+import { User, UserSchema } from '../user/entities/user.entity';
 
 import { AuthController } from './auth.controller';
 import { AuthGuard } from './auth.guard';
