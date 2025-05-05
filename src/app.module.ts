@@ -5,6 +5,7 @@ import { Module } from '@nestjs/common';
 import { UserModule } from './user/user.module';
 import { TruckModule } from './truck/truck.module';
 import { DriverModule } from './driver/driver.module';
+import { DeliveryModule } from './delivery/delivery.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { DriverModule } from './driver/driver.module';
     AuthModule,
     TruckModule,
     DriverModule,
+    DeliveryModule,
   ],
 })
 export class AppModule {}
