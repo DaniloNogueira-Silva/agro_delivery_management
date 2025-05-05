@@ -4,6 +4,7 @@ import { DatabaseModule } from './database/database.module';
 import { Module } from '@nestjs/common';
 import { UserModule } from './user/user.module';
 import { TruckModule } from './truck/truck.module';
+import { DriverModule } from './driver/driver.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { TruckModule } from './truck/truck.module';
     DatabaseModule,
     AuthModule,
     TruckModule,
+    DriverModule,
   ],
 })
 export class AppModule {}
