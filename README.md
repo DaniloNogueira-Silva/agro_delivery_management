@@ -1,6 +1,3 @@
-````markdown
-# 📄 README.md para o projeto AgroVerde Logística
-
 # Sistema de Gestão de Frota e Entregas - AgroVerde Logística
 
 ### 🚚 Projeto de controle de frota, entregas e motoristas para empresas de transporte de alimentos perecíveis.
