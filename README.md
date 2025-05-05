@@ -71,7 +71,6 @@ backend/
 ├── deliveries/     # Controle de entregas
 ├── maintenance/    # Controle de manutenção
 ```
-````
 
 ---
 
